@@ -1,25 +1,10 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  View,
-  Image,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  SafeAreaView,
-} from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { faUnlockKeyhole } from "@fortawesome/free-solid-svg-icons";
-import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import SignUpScreen from "./screens/Signupscreen";
-import loginscreen from "./screens/Loginscreen";
+import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
 
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
-export default function Login(props) {
+
+ function First (props) {
   return (
     <View style={css.container}>
       <Image
@@ -35,9 +20,15 @@ export default function Login(props) {
       </Text>
       <TouchableOpacity
         style={[css.button, css.btncolor1]}
-        onPress={() => props.navigation.navigate("Home page")}
+        onPress={() => props.navigation.navigate("Loginscreen")}
       >
-        <Text style={css.buttonText}>LOG IN</Text>
+        <Text style={css.buttonText}>Log In</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[css.button, css.btncolor1]}
+        onPress={() => props.navigation.navigate("Signupscreen")}
+      >
+        <Text style={css.buttonText}>Sign Up</Text>
       </TouchableOpacity>
 
       <StatusBar style="auto" />
@@ -165,3 +156,5 @@ const css = StyleSheet.create({
     color: "white",
   },
 });
+
+export default First;

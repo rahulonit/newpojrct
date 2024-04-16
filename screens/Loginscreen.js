@@ -1,71 +1,64 @@
+import React from "react";
 import {
-  StyleSheet,
   View,
-  Image,
   Text,
-  TouchableOpacity,
-  TextInput,
+  StyleSheet,
   SafeAreaView,
+  Image,
+  TouchableOpacity,
+  
+  TextInput,
 } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faUnlockKeyhole } from "@fortawesome/free-solid-svg-icons";
-import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import SignUpScreen from "./screens/Signupscreen";
-export default function Home(props) {
+const Login = (props) => {
   return (
-    <View>
-    
-      <Text>hello</Text>
-    </View>
-
-    // <SafeAreaView style={css.home}>
-    //   <Image
-    //     style={css.homeimg}
-    //     src="https://cdn.pixabay.com/photo/2016/10/24/09/41/businesswoman-1765651_960_720.png"
-    //   />
-    //   <Text style={css.heading}>Welcome back!</Text>
-    //   <Text style={css.textlog}>
-    //     Log in to your existant account of Q Allure
-    //   </Text>
-    //   <View style={css.TextInputview}>
-    //     <FontAwesomeIcon icon={faUser} style={css.inputicon} />
-    //     <TextInput style={css.input} placeholder="Gmail"></TextInput>
-    //   </View>
-    //   <View style={css.TextInputview}>
-    //     <FontAwesomeIcon icon={faUnlockKeyhole} style={css.inputicon} />
-    //     <TextInput style={css.input} placeholder="Password"></TextInput>
-    //   </View>
-    //   <Text style={css.forgot}>Forgot Password?</Text>
-    //   <TouchableOpacity style={[css.button, css.btncolor1]}>
-    //     <Text style={css.buttonText}>LOG IN</Text>
-    //   </TouchableOpacity>
-    //   <Text style={css.connect}>Or connect using</Text>
-    //   <View style={css.mediaview}>
-    //     <TouchableOpacity style={[css.mediabotton, css.mediabottoncolorf]}>
-    //       <FontAwesomeIcon icon={faFacebookF} style={css.mediaicon} />
-    //       <Text style={css.facebooktext}>Facebook</Text>
-    //     </TouchableOpacity>
-    //     <TouchableOpacity style={[css.mediabotton, css.mediabottoncolorg]}>
-    //       <FontAwesomeIcon icon={faGoogle} style={css.mediaicon} />
-    //       <Text style={css.facebooktext}>Google</Text>
-    //     </TouchableOpacity>
-    //   </View>
-    //   <Text>
-    //     <Text>Don't have an account?</Text>
-    //     <Text
-    //       style={css.inputicon}
-    //       onPress={() => props.navigation.navigate("Signupscreen")}
-    //     >
-    //       Sign Up
-    //     </Text>
-    //   </Text>
-    // </SafeAreaView>
+    <SafeAreaView style={css.home}>
+      <Image
+        style={css.homeimg}
+        src="https://cdn.pixabay.com/photo/2016/10/24/09/41/businesswoman-1765651_960_720.png"
+      />
+      <Text style={css.heading}>Welcome back!</Text>
+      <Text style={css.textlog}>
+        Log in to your existant account of Q Allure
+      </Text>
+      <View style={css.TextInputview}>
+        <FontAwesomeIcon icon={faUser} style={css.inputicon} />
+        <TextInput style={css.input} placeholder="Gmail"></TextInput>
+      </View>
+      <View style={css.TextInputview}>
+        <FontAwesomeIcon icon={faUnlockKeyhole} style={css.inputicon} />
+        <TextInput style={css.input} placeholder="Password"></TextInput>
+      </View>
+      <Text style={css.forgot}>Forgot Password?</Text>
+      <TouchableOpacity style={[css.button, css.btncolor1]}>
+        <Text style={css.buttonText}>LOG IN</Text>
+      </TouchableOpacity>
+      <Text style={css.connect}>Or connect using</Text>
+      <View style={css.mediaview}>
+        <TouchableOpacity style={[css.mediabotton, css.mediabottoncolorf]}>
+          <FontAwesomeIcon icon={faFacebookF} style={css.mediaicon} />
+          <Text style={css.facebooktext}>Facebook</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[css.mediabotton, css.mediabottoncolorg]}>
+          <FontAwesomeIcon icon={faGoogle} style={css.mediaicon} />
+          <Text style={css.facebooktext}>Google</Text>
+        </TouchableOpacity>
+      </View>
+      <Text>
+        <Text>Don't have an account?</Text>
+        <Text
+          style={css.inputicon}
+          onPress={() => props.navigation.navigate("Signupscreen")}
+        >
+          Sign Up
+        </Text>
+      </Text>
+    </SafeAreaView>
   );
-}
+};
 
 const css = StyleSheet.create({
   container: {
@@ -81,7 +74,7 @@ const css = StyleSheet.create({
   heading: {
     fontSize: 30,
     fontWeight: "500",
-    paddingTop: 20,
+    paddingTop: 15,
     textAlign: "center",
   },
   text: {
@@ -131,8 +124,8 @@ const css = StyleSheet.create({
     color: "#0148a4",
   },
   TextInputview: {
-    marginBottom: 10,
-    marginTop: 10,
+    marginBottom: 8,
+    marginTop: 8,
     height: 50,
     width: 290,
     justifyContent: "space-around",
@@ -163,7 +156,7 @@ const css = StyleSheet.create({
     justifyContent: "space-around",
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 15,
+    marginTop: 10,
     marginBottom: 20,
   },
   mediabotton: {
@@ -187,3 +180,5 @@ const css = StyleSheet.create({
     color: "white",
   },
 });
+
+export default Login;
