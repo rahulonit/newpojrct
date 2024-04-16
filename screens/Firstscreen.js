@@ -15,32 +15,11 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faUnlockKeyhole } from "@fortawesome/free-solid-svg-icons";
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-// import SignUpScreen from "./screens/Signupscreen";
+import SignUpScreen from "./screens/Signupscreen";
 import loginscreen from "./screens/Loginscreen";
 
 const Stack = createNativeStackNavigator();
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Home page"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Signupscreen" component={SignUpScreen} />
-        <Stack.Screen name="Loginscreen" component={loginscreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-
-const Login = (props) => {
+export default function Login(props) {
   return (
     <View style={css.container}>
       <Image
@@ -56,9 +35,7 @@ const Login = (props) => {
       </Text>
       <TouchableOpacity
         style={[css.button, css.btncolor1]}
-        onPress={() => props.navigation.navigate("Loginscreen")}
-
-        // onPress={() => props.navigation.navigate("Home page")}
+        onPress={() => props.navigation.navigate("Home page")}
       >
         <Text style={css.buttonText}>LOG IN</Text>
       </TouchableOpacity>
@@ -66,54 +43,7 @@ const Login = (props) => {
       <StatusBar style="auto" />
     </View>
   );
-};
-
-// const Home = (props) => {
-//   return (
-//     <SafeAreaView style={css.home}>
-//       <Image
-//         style={css.homeimg}
-//         src="https://cdn.pixabay.com/photo/2016/10/24/09/41/businesswoman-1765651_960_720.png"
-//       />
-//       <Text style={css.heading}>Welcome back!</Text>
-//       <Text style={css.textlog}>
-//         Log in to your existant account of Q Allure
-//       </Text>
-//       <View style={css.TextInputview}>
-//         <FontAwesomeIcon icon={faUser} style={css.inputicon} />
-//         <TextInput style={css.input} placeholder="Gmail"></TextInput>
-//       </View>
-//       <View style={css.TextInputview}>
-//         <FontAwesomeIcon icon={faUnlockKeyhole} style={css.inputicon} />
-//         <TextInput style={css.input} placeholder="Password"></TextInput>
-//       </View>
-//       <Text style={css.forgot}>Forgot Password?</Text>
-//       <TouchableOpacity style={[css.button, css.btncolor1]}>
-//         <Text style={css.buttonText}>LOG IN</Text>
-//       </TouchableOpacity>
-//       <Text style={css.connect}>Or connect using</Text>
-//       <View style={css.mediaview}>
-//         <TouchableOpacity style={[css.mediabotton, css.mediabottoncolorf]}>
-//           <FontAwesomeIcon icon={faFacebookF} style={css.mediaicon} />
-//           <Text style={css.facebooktext}>Facebook</Text>
-//         </TouchableOpacity>
-//         <TouchableOpacity style={[css.mediabotton, css.mediabottoncolorg]}>
-//           <FontAwesomeIcon icon={faGoogle} style={css.mediaicon} />
-//           <Text style={css.facebooktext}>Google</Text>
-//         </TouchableOpacity>
-//       </View>
-//       <Text>
-//         <Text>Don't have an account?</Text>
-//         <Text
-//           style={css.inputicon}
-//           onPress={() => props.navigation.navigate("Signupscreen")}
-//         >
-//           Sign Up
-//         </Text>
-//       </Text>
-//     </SafeAreaView>
-//   );
-// };
+}
 
 const css = StyleSheet.create({
   container: {
@@ -233,25 +163,5 @@ const css = StyleSheet.create({
   facebooktext: { color: "white", fontWeight: "500", alignSelf: "center" },
   mediaicon: {
     color: "white",
-  },
-});
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
