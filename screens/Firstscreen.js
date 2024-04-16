@@ -1,45 +1,23 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  View,
-  Image,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  SafeAreaView,
-} from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { faUnlockKeyhole } from "@fortawesome/free-solid-svg-icons";
-import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import SignUpScreen from "./screens/Signupscreen";
-import loginscreen from "./screens/Loginscreen";
+import React from 'react';
+import { StyleSheet, View, Image, Text, TouchableOpacity, StatusBar } from 'react-native';
 
-const Stack = createNativeStackNavigator();
-export default function Login(props) {
+const firstscreen = ({ navigation }) => {
   return (
-    <View style={css.container}>
+    <View style={styles.container}>
       <Image
-        source={{
-          uri: "https://cdn.pixabay.com/photo/2016/10/24/09/41/businesswoman-1765651_960_720.png",
-        }}
-        style={css.banner}
+        source={{ uri: "https://cdn.pixabay.com/photo/2016/10/24/09/41/businesswoman-1765651_960_720.png" }}
+        style={styles.banner}
       />
-      <Text style={css.heading}>Welcome to{"\n"}SeekJob</Text>
-      <Text style={css.text}>
-        The static images are added in app by placing it in somewhere in the
-        source code directory and provide its path as:
+      <Text style={styles.heading}>Welcome to{"\n"}SeekJob</Text>
+      <Text style={styles.text}>
+        Tap below to login to your account and explore opportunities.
       </Text>
       <TouchableOpacity
-        style={[css.button, css.btncolor1]}
-        onPress={() => props.navigation.navigate("Home page")}
+        style={[styles.button, styles.btncolor1]}
+        onPress={() => navigation.navigate("LoginScreen")}
       >
-        <Text style={css.buttonText}>LOG IN</Text>
+        <Text style={styles.buttonText}>LOG IN</Text>
       </TouchableOpacity>
-
       <StatusBar style="auto" />
     </View>
   );
