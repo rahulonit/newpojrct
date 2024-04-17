@@ -1,14 +1,23 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Image, Text, TouchableOpacity, styles } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  styles,
+} from "react-native";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
 
- function First (props) {
+function First(props) {
   return (
     <View style={css.container}>
       <Image
-        source={{ uri: "https://cdn.pixabay.com/photo/2016/10/24/09/41/businesswoman-1765651_960_720.png" }}
+        source={{
+          uri: "https://cdn.pixabay.com/photo/2016/10/24/09/41/businesswoman-1765651_960_720.png",
+        }}
         style={css.banner}
       />
       <Text style={css.heading}>Welcome to{"\n"}SeekJob</Text>

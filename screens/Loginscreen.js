@@ -1,5 +1,20 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity, TextInput, Alert } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  Alert
+} from "react-native";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faLock, faUserAlt } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { auth } from "../firebaseConfig";
+
 
 const Login = (props) => {
   const [email, setEmail] = useState('');
@@ -11,7 +26,7 @@ const Login = (props) => {
   };
 
   const validatePassword = (password) => {
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // Minimum eight characters, at least one letter and one number
+    const passwordRegex  = /^(?=.{8,})/; // Minimum eight characters, at least one letter and one number
    return passwordRegex.test(password);
   };
 
@@ -27,6 +42,8 @@ const Login = (props) => {
     console.log("Login Success"); // Here you can replace this log with your login logic
   };
 
+
+
   return (
     <SafeAreaView style={css.home}>
       <Image
@@ -38,6 +55,7 @@ const Login = (props) => {
         Log in to your existing account of Q Allure
       </Text>
       <View style={css.TextInputview}>
+      <FontAwesomeIcon icon={faUserAlt} style={css.textboxicon}/>
         <TextInput
           style={css.input}
           placeholder="Email"
@@ -48,6 +66,7 @@ const Login = (props) => {
         />
       </View>
       <View style={css.TextInputview}>
+      <FontAwesomeIcon icon={faLock} style={css.textboxicon}/>
         <TextInput
           style={css.input}
           placeholder="Password"
@@ -66,10 +85,12 @@ const Login = (props) => {
       <Text style={css.connect}>Or connect using</Text>
       <View style={css.mediaview}>
         <TouchableOpacity style={[css.mediabotton, css.mediabottoncolorf]}>
-          <Text style={css.facebooktext}>Facebook</Text>
+          <FontAwesomeIcon icon={faFacebookF} style={css.ssmicon} />
+          <Text style={css.facebooktext}> Facebook</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[css.mediabotton, css.mediabottoncolorg]}>
-          <Text style={css.facebooktext}>Google</Text>
+          <FontAwesomeIcon icon={faGoogle} style={css.ssmicon} />
+          <Text style={css.facebooktext}> Google</Text>
         </TouchableOpacity>
       </View>
       <Text>
@@ -105,16 +126,17 @@ const css = StyleSheet.create({
   },
   input: {
     flex: 1,
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
+    height: 50,
     paddingHorizontal: 10,
+  },
+  textboxicon:{
+    marginBottom: 15,
+    marginTop: 15,
   },
   TextInputview: {
     flexDirection: 'row',
     marginBottom: 10,
     marginTop: 10,
-    height: 50,
     width: '100%',
     justifyContent: 'space-around',
     alignItems: 'flex-start',
@@ -123,7 +145,7 @@ const css = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 30,
     paddingLeft: 20,
-    borderColor: '#0148a4',
+    borderColor: 'grey',
   },
   button: {
     height: 60,
@@ -164,6 +186,7 @@ const css = StyleSheet.create({
   facebooktext: {
     color: 'white',
   },
+  
   inputicon: {
     color: '#0148a4',
     fontWeight: 'bold',
@@ -173,6 +196,10 @@ const css = StyleSheet.create({
     color: 'blue',
     marginBottom: 15,
   },
+  ssmicon: {  // Icon style added
+    color: 'white',
+    fontSize: 20,
+  }
 });
 
 export default Login;
