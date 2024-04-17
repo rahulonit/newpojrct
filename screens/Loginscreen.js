@@ -10,39 +10,26 @@ import {
   Alert
 } from "react-native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { faLock, faUserAlt } from "@fortawesome/free-solid-svg-icons";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { faFacebookF, faGoogle, faLock, faUserAlt } from "@fortawesome/free-solid-svg-icons";
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../firebaseConfig";
-
 
 const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const validateEmail = (email) => {
-    const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-    return emailRegex.test(email);
-  };
-
-  const validatePassword = (password) => {
-    const passwordRegex  = /^(?=.{8,})/; // Minimum eight characters, at least one letter and one number
-   return passwordRegex.test(password);
-  };
-
   const handleLogin = () => {
-    if (!validateEmail(email)) {
-      Alert.alert("Invalid Email", "Please enter a valid email address.");
-      return;
-    }
-    if (!validatePassword(password)) {
-      Alert.alert("Invalid Password", "Password must be at least 8 characters long and include at least one letter and one number.");
-      return;
-    }
-    console.log("Login Success"); // Here you can replace this log with your login logic
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        console.log("Logged in with:", user.email);
+        // Navigate to another screen or update the state
+        Alert.alert("Login Successful", `Welcome back, ${user.email}`);
+      })
+      .catch((error) => {
+        Alert.alert("Login Error", error.message);
+      });
   };
-
-
 
   return (
     <SafeAreaView style={css.home}>
@@ -55,7 +42,7 @@ const Login = (props) => {
         Log in to your existing account of Q Allure
       </Text>
       <View style={css.TextInputview}>
-      <FontAwesomeIcon icon={faUserAlt} style={css.textboxicon}/>
+        <FontAwesomeIcon icon={faUserAlt} style={css.textboxicon}/>
         <TextInput
           style={css.input}
           placeholder="Email"
@@ -66,7 +53,7 @@ const Login = (props) => {
         />
       </View>
       <View style={css.TextInputview}>
-      <FontAwesomeIcon icon={faLock} style={css.textboxicon}/>
+        <FontAwesomeIcon icon={faLock} style={css.textboxicon}/>
         <TextInput
           style={css.input}
           placeholder="Password"
