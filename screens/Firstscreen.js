@@ -1,34 +1,21 @@
-<<<<<<< HEAD
-import React from 'react';
-import { StyleSheet, View, Image, Text, TouchableOpacity, StatusBar } from 'react-native';
-
-const firstscreen = ({ navigation }) => {
-=======
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Image, Text, TouchableOpacity, styles } from "react-native";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
 
  function First (props) {
->>>>>>> 7b36a0b641a9ee0f376198d84547fcf6a4d7c537
   return (
-    <View style={styles.container}>
+    <View style={css.container}>
       <Image
         source={{ uri: "https://cdn.pixabay.com/photo/2016/10/24/09/41/businesswoman-1765651_960_720.png" }}
-        style={styles.banner}
+        style={css.banner}
       />
-      <Text style={styles.heading}>Welcome to{"\n"}SeekJob</Text>
-      <Text style={styles.text}>
+      <Text style={css.heading}>Welcome to{"\n"}SeekJob</Text>
+      <Text style={css.text}>
         Tap below to login to your account and explore opportunities.
       </Text>
       <TouchableOpacity
-<<<<<<< HEAD
-        style={[styles.button, styles.btncolor1]}
-        onPress={() => navigation.navigate("LoginScreen")}
-      >
-        <Text style={styles.buttonText}>LOG IN</Text>
-=======
         style={[css.button, css.btncolor1]}
         onPress={() => props.navigation.navigate("Loginscreen")}
       >
@@ -39,7 +26,6 @@ const Stack = createNativeStackNavigator();
         onPress={() => props.navigation.navigate("Signupscreen")}
       >
         <Text style={css.buttonText}>Sign Up</Text>
->>>>>>> 7b36a0b641a9ee0f376198d84547fcf6a4d7c537
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>

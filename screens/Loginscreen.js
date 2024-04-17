@@ -6,13 +6,10 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
-  
+  styles,
   TextInput,
 } from "react-native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { faUnlockKeyhole } from "@fortawesome/free-solid-svg-icons";
+
 const Login = (props) => {
   return (
     <SafeAreaView style={css.home}>
@@ -25,11 +22,9 @@ const Login = (props) => {
         Log in to your existant account of Q Allure
       </Text>
       <View style={css.TextInputview}>
-        <FontAwesomeIcon icon={faUser} style={css.inputicon} />
         <TextInput style={css.input} placeholder="Gmail"></TextInput>
       </View>
       <View style={css.TextInputview}>
-        <FontAwesomeIcon icon={faUnlockKeyhole} style={css.inputicon} />
         <TextInput style={css.input} placeholder="Password"></TextInput>
       </View>
       <Text style={css.forgot}>Forgot Password?</Text>
@@ -39,11 +34,9 @@ const Login = (props) => {
       <Text style={css.connect}>Or connect using</Text>
       <View style={css.mediaview}>
         <TouchableOpacity style={[css.mediabotton, css.mediabottoncolorf]}>
-          <FontAwesomeIcon icon={faFacebookF} style={css.mediaicon} />
           <Text style={css.facebooktext}>Facebook</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[css.mediabotton, css.mediabottoncolorg]}>
-          <FontAwesomeIcon icon={faGoogle} style={css.mediaicon} />
           <Text style={css.facebooktext}>Google</Text>
         </TouchableOpacity>
       </View>
