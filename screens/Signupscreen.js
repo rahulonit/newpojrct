@@ -44,9 +44,7 @@ function Signup (props) {
         <Text>Already have an account?</Text>
 
         <Text
-          style={styles.logintext}
-         
-        >
+          style={styles.logintext} onPress={() => props.navigation.navigate("Loginscreen")}>
           Login here
         </Text>
       </Text>

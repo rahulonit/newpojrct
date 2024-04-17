@@ -21,12 +21,6 @@ const Stack = createNativeStackNavigator();
       >
         <Text style={css.buttonText}>Log In</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={[css.button, css.btncolor1]}
-        onPress={() => props.navigation.navigate("Signupscreen")}
-      >
-        <Text style={css.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
   );
