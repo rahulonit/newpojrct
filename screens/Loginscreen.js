@@ -1,58 +1,80 @@
-import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-  
-  TextInput,
-} from "react-native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { faUnlockKeyhole } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity, TextInput, Alert } from "react-native";
+
 const Login = (props) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const validateEmail = (email) => {
+    const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // Minimum eight characters, at least one letter and one number
+   return passwordRegex.test(password);
+  };
+
+  const handleLogin = () => {
+    if (!validateEmail(email)) {
+      Alert.alert("Invalid Email", "Please enter a valid email address.");
+      return;
+    }
+    if (!validatePassword(password)) {
+      Alert.alert("Invalid Password", "Password must be at least 8 characters long and include at least one letter and one number.");
+      return;
+    }
+    console.log("Login Success"); // Here you can replace this log with your login logic
+  };
+
   return (
     <SafeAreaView style={css.home}>
       <Image
         style={css.homeimg}
-        src="https://cdn.pixabay.com/photo/2016/10/24/09/41/businesswoman-1765651_960_720.png"
+        source={{ uri: "https://cdn.pixabay.com/photo/2016/10/24/09/41/businesswoman-1765651_960_720.png" }}
       />
       <Text style={css.heading}>Welcome back!</Text>
       <Text style={css.textlog}>
-        Log in to your existant account of Q Allure
+        Log in to your existing account of Q Allure
       </Text>
       <View style={css.TextInputview}>
-        <FontAwesomeIcon icon={faUser} style={css.inputicon} />
-        <TextInput style={css.input} placeholder="Gmail"></TextInput>
+        <TextInput
+          style={css.input}
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
       </View>
       <View style={css.TextInputview}>
-        <FontAwesomeIcon icon={faUnlockKeyhole} style={css.inputicon} />
-        <TextInput style={css.input} placeholder="Password"></TextInput>
+        <TextInput
+          style={css.input}
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={true}
+          autoCapitalize="none"
+        />
       </View>
-      <Text style={css.forgot}>Forgot Password?</Text>
-      <TouchableOpacity style={[css.button, css.btncolor1]}>
+      <Text style={css.forgot} onPress={() => console.log("Forgot Password Pressed")}>
+        Forgot Password?
+      </Text>
+      <TouchableOpacity style={[css.button, css.btncolor1]} onPress={handleLogin}>
         <Text style={css.buttonText}>LOG IN</Text>
       </TouchableOpacity>
       <Text style={css.connect}>Or connect using</Text>
       <View style={css.mediaview}>
         <TouchableOpacity style={[css.mediabotton, css.mediabottoncolorf]}>
-          <FontAwesomeIcon icon={faFacebookF} style={css.mediaicon} />
           <Text style={css.facebooktext}>Facebook</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[css.mediabotton, css.mediabottoncolorg]}>
-          <FontAwesomeIcon icon={faGoogle} style={css.mediaicon} />
           <Text style={css.facebooktext}>Google</Text>
         </TouchableOpacity>
       </View>
       <Text>
-        <Text>Don't have an account?</Text>
-        <Text
-          style={css.inputicon}
-          onPress={() => props.navigation.navigate("Signupscreen")}
-        >
+        Don't have an account?{" "}
+        <Text style={css.inputicon} onPress={() => props.navigation.navigate("Signupscreen")}>
           Sign Up
         </Text>
       </Text>
@@ -61,29 +83,47 @@ const Login = (props) => {
 };
 
 const css = StyleSheet.create({
-  container: {
+  home: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#fff',
   },
-  banner: {
-    height: "40%",
-    width: "80%",
+  homeimg: {
+    height: "30%",
+    width: "100%",
   },
   heading: {
-    fontSize: 30,
-    fontWeight: "500",
-    paddingTop: 15,
-    textAlign: "center",
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
-  text: {
-    color: "grey",
-    height: 70,
-    width: 280,
-    justifyContent: "center",
-    padding: 10,
-    alignItems: "center",
+  textlog: {
+    color: 'grey',
+    marginBottom: 20,
+  },
+  input: {
+    flex: 1,
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+  },
+  TextInputview: {
+    flexDirection: 'row',
+    marginBottom: 10,
+    marginTop: 10,
+    height: 50,
+    width: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'flex-start',
+    alignContent: 'center',
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderRadius: 30,
+    paddingLeft: 20,
+    borderColor: '#0148a4',
   },
   button: {
     height: 60,
@@ -92,92 +132,46 @@ const css = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 10,
+    backgroundColor: "#0148a4",
   },
   buttonText: {
     color: "white",
     fontSize: 18,
-  },
-  btncolor1: {
-    backgroundColor: "#0148a4",
-  },
-  btncolor2: {
-    backgroundColor: "grey",
-  },
-  home: {
-    justifyContent: "center",
-    alignItems: "center",
-    flex: 1,
-    overflow: "scroll",
-    height: "100%",
-  },
-  homeimg: {
-    height: "30%",
-    width: "100%",
-  },
-  textlog: {
-    color: "grey",
-    marginBottom: 20,
-  },
-  input: {
-    width: 230,
-    height: 49,
-    color: "#0148a4",
-  },
-  TextInputview: {
-    marginBottom: 8,
-    marginTop: 8,
-    height: 50,
-    width: 290,
-    justifyContent: "space-around",
-    alignItems: "flex-start",
-    alignContent: "center",
-    flexDirection: "row",
-    borderWidth: 1,
-    borderRadius: 30,
-    paddingLeft: 20,
-    borderColor: "#0148a4",
-  },
-  inputicon: {
-    alignSelf: "center",
-    color: "#0148a4",
-  },
-  forgot: {
-    alignSelf: "flex-end",
-    paddingRight: 40,
-    marginBottom: 15,
   },
   connect: {
     color: "grey",
     marginTop: 20,
   },
   mediaview: {
-    height: 45,
-    width: 280,
-    justifyContent: "space-around",
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    marginTop: 15,
     marginBottom: 20,
   },
   mediabotton: {
-    alignContent: "center",
-    flexDirection: "row",
-    backgroundColor: "#0148a4",
-    height: 40,
-    width: 120,
-    justifyContent: "space-evenly",
-    borderRadius: 7,
-    alignItems: "center",
-  },
-  mediabottoncolorf: {
-    backgroundColor: "#385c8e",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '48%',
+    padding: 10,
+    borderRadius: 5,
+    backgroundColor: '#385c8e',  // Adjusted for Facebook button
   },
   mediabottoncolorg: {
-    backgroundColor: "#f14336",
+    backgroundColor: '#f14336',  // Adjusted for Google button
   },
-  facebooktext: { color: "white", fontWeight: "500", alignSelf: "center" },
-  mediaicon: {
-    color: "white",
+  facebooktext: {
+    color: 'white',
+  },
+  inputicon: {
+    color: '#0148a4',
+    fontWeight: 'bold',
+  },
+  forgot: {
+    alignSelf: 'flex-end',
+    color: 'blue',
+    marginBottom: 15,
   },
 });
 

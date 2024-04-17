@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Image, Text, TouchableOpacity, styles } from "react-native";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
@@ -8,15 +8,12 @@ const Stack = createNativeStackNavigator();
   return (
     <View style={css.container}>
       <Image
-        source={{
-          uri: "https://cdn.pixabay.com/photo/2016/10/24/09/41/businesswoman-1765651_960_720.png",
-        }}
+        source={{ uri: "https://cdn.pixabay.com/photo/2016/10/24/09/41/businesswoman-1765651_960_720.png" }}
         style={css.banner}
       />
       <Text style={css.heading}>Welcome to{"\n"}SeekJob</Text>
       <Text style={css.text}>
-        The static images are added in app by placing it in somewhere in the
-        source code directory and provide its path as:
+        Tap below to login to your account and explore opportunities.
       </Text>
       <TouchableOpacity
         style={[css.button, css.btncolor1]}
@@ -24,13 +21,6 @@ const Stack = createNativeStackNavigator();
       >
         <Text style={css.buttonText}>Log In</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={[css.button, css.btncolor1]}
-        onPress={() => props.navigation.navigate("Signupscreen")}
-      >
-        <Text style={css.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
-
       <StatusBar style="auto" />
     </View>
   );

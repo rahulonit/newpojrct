@@ -1,18 +1,8 @@
-import react from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  TextInput,
-  TouchableOpacity,
-  Button,
-} from "react-native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
-import { faMobileScreen } from "@fortawesome/free-solid-svg-icons";
-import { faUnlockKeyhole } from "@fortawesome/free-solid-svg-icons";
+// SignUpScreen.js
+import React from 'react';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faUser, faEnvelope, faMobileScreen, faUnlockKeyhole } from '@fortawesome/free-solid-svg-icons';
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
@@ -54,15 +44,13 @@ function Signup (props) {
         <Text>Already have an account?</Text>
 
         <Text
-          style={styles.logintext}
-         
-        >
+          style={styles.logintext} onPress={() => props.navigation.navigate("Loginscreen")}>
           Login here
         </Text>
       </Text>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   saf: {
