@@ -1,13 +1,64 @@
 // SignUpScreen.js
-import React from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faUser, faEnvelope, faMobileScreen, faUnlockKeyhole } from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  SafeAreaView,
+  Alert,
+} from "react-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faUser, faEnvelope, faMobileScreen, faUnlockKeyhole } from "@fortawesome/free-solid-svg-icons";
+import { auth } from "../firebaseConfig"; // Make sure the path is correct
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-const Stack = createNativeStackNavigator();
+const Signup = (props) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-function Signup (props) {
+  const validateEmail = (email) => {
+    const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.{8,})/; // At least 8 characters
+    return passwordRegex.test(password);
+  };
+
+  const handleSignup = () => {
+    if (!validateEmail(email)) {
+      Alert.alert("Invalid Email", "Please enter a valid email address.");
+      return;
+    }
+    if (!validatePassword(password)) {
+      Alert.alert(
+        "Invalid Password",
+        "Password must be at least 8 characters long and include at least one letter and one number."
+      );
+      return;
+    }
+    if (password !== confirmPassword) {
+      Alert.alert("Password Mismatch", "The passwords do not match.");
+      return;
+    }
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        console.log(user.email);
+        Alert.alert("Signup Successful", `Welcome, ${user.email}`);
+      })
+      .catch((error) => {
+        Alert.alert("Error", error.message);
+      });
+  };
+
   return (
     <SafeAreaView style={styles.saf}>
       <Text style={styles.lets}>Let's Get Started!</Text>
@@ -16,41 +67,72 @@ function Signup (props) {
       </Text>
       <View style={styles.inputView}>
         <FontAwesomeIcon icon={faUser} style={styles.inputicon} />
-        <TextInput style={styles.input} placeholder="Name"></TextInput>
+        <TextInput
+          style={styles.input}
+          placeholder="Name"
+          value={name}
+          onChangeText={setName}
+        />
       </View>
       <View style={styles.inputView}>
         <FontAwesomeIcon icon={faEnvelope} style={styles.inputicon} />
-        <TextInput style={styles.input} placeholder="Email"></TextInput>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
       </View>
       <View style={styles.inputView}>
         <FontAwesomeIcon icon={faMobileScreen} style={styles.inputicon} />
-        <TextInput style={styles.input} placeholder="Phone"></TextInput>
-      </View>
-      <View style={styles.inputView}>
-        <FontAwesomeIcon icon={faUnlockKeyhole} style={styles.inputicon} />
-        <TextInput style={styles.input} placeholder="Password"></TextInput>
+        <TextInput
+          style={styles.input}
+          placeholder="Phone"
+          value={phone}
+          onChangeText={setPhone}
+          keyboardType="phone-pad"
+        />
       </View>
       <View style={styles.inputView}>
         <FontAwesomeIcon icon={faUnlockKeyhole} style={styles.inputicon} />
         <TextInput
           style={styles.input}
-          placeholder="Conirm Password"
-        ></TextInput>
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={true}
+        />
       </View>
-      <TouchableOpacity style={styles.button}>
+      <View style={styles.inputView}>
+        <FontAwesomeIcon icon={faUnlockKeyhole} style={styles.inputicon} />
+        <TextInput
+          style={styles.input}
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+          secureTextEntry={true}
+        />
+      </View>
+      <TouchableOpacity style={styles.button} onPress={handleSignup}>
         <Text style={styles.buttontext}>CREATE</Text>
       </TouchableOpacity>
       <Text>
-        <Text>Already have an account?</Text>
-
+        Already have an account?{" "}
         <Text
-          style={styles.logintext} onPress={() => props.navigation.navigate("Loginscreen")}>
+          style={styles.logintext}
+          onPress={() => props.navigation.navigate("Login")}
+        >
           Login here
         </Text>
       </Text>
     </SafeAreaView>
   );
-};
+}
+
+
+
 
 const styles = StyleSheet.create({
   saf: {
